@@ -33,9 +33,9 @@ app.use(
     saveUninitialized: true,
     store: store,
     cookie: {
-      secure: false,
-      // domain: "smashingpages-616e5.web.app", // set the domain of your client here
-      httpOnly: true,
+      secure: true,
+      sameSite: "none", // set to 'none' if your app is hosted on a different domain
+      maxAge: 86400000, // session expiration time in milliseconds
     },
   })
 );
