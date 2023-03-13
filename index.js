@@ -34,6 +34,7 @@ app.use(
     store: store,
     cookie: {
       secure: true,
+      httpOnly: true,
       sameSite: "none", // set to 'none' if your app is hosted on a different domain
       maxAge: 86400000, // session expiration time in milliseconds
     },
