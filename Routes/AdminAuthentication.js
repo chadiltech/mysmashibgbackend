@@ -179,16 +179,6 @@ router.post("/myadmin/login", async (req, res) => {
         error: "3Please try to login with correct credentials!",
       });
     }
-    const compareSecret = await bcrypt.compare(
-      process.env.ADMIN_SECRET_KEY,
-      secret,
-    );
-    if (!compareSecret) {
-      console.log(admin.secret);
-      return res.status(401).json({
-        error: "4Please try to login with correct credentials!",
-      });
-    }
     if (admin.configEmail === false) {
       const verifyMailToken = jwt.sign(
         {email: admin.email, id: admin.id},
