@@ -11,6 +11,7 @@ const cookieParser = require("cookie-parser");
 require("dotenv").config();
 const app = express();
 const socket = require("socket.io");
+app.set("trust proxy", 1);
 app.use(
   cors({
     origin: "https://smashingpages-616e5.web.app",
