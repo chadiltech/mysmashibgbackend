@@ -164,19 +164,19 @@ router.post("/myadmin/login", async (req, res) => {
     if (!admin) {
       return res
         .status(401)
-        .json({error: "1Please try to login with correct credentials!"});
+        .json({error: "Please try to login with correct credentials!"});
     }
     const comparePassword = await bcrypt.compare(password, admin.password);
     if (!comparePassword) {
       return res
         .status(401)
-        .json({error: "2Please try to login with correct credentials!"});
+        .json({error: "Please try to login with correct credentials!"});
     }
     const Providedsecret = Buffer.from(secret, "hex");
     const adminsecretkey = Buffer.from(process.env.ADMIN_SECRET_KEY, "hex");
     if (Buffer.compare(Providedsecret, adminsecretkey) !== 0) {
       return res.status(401).json({
-        error: "3Please try to login with correct credentials!",
+        error: "Please try to login with correct credentials!",
       });
     }
     if (admin.configEmail === false) {
@@ -220,15 +220,6 @@ router.get(
       if (!admin) {
         return res.status(400).json({error: "Admin note found!"});
       }
-      const compareSecret = await bcrypt.compare(
-        process.env.ADMIN_SECRET_KEY,
-        admin.secret,
-      );
-      if (!compareSecret) {
-        return res
-          .setMaxListeners(401)
-          .json({error: "The admin logged in with token is expired!"});
-      }
       return res.status(200).json({
         name: admin.name,
         lastName: admin.lastName,
@@ -251,13 +242,6 @@ router.get("/verify/myadmin/token", isAdmin, async (req, res) => {
   const admin = await Admin.findById(adminId);
   if (!admin) {
     return res.status(401).json({error: "2Unauthorized"});
-  }
-  const compareSecret = await bcrypt.compare(
-    process.env.ADMIN_SECRET_KEY,
-    admin.secret,
-  );
-  if (!compareSecret) {
-    return res.status(401).json({error: "Admin note found"});
   }
   res.status(200).json({verified: true});
 });
