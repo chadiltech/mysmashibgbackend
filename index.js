@@ -30,11 +30,10 @@ app.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     store: store,
     cookie: {
-      secure: false,
-      httpOnly: true,
+      secure: true,
       sameSite: "none", // set to 'none' if your app is hosted on a different domain
       maxAge: 86400000, // session expiration time in milliseconds
     },
