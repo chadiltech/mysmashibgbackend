@@ -181,9 +181,10 @@ router.post("/myadmin/login", async (req, res) => {
     }
     const compareSecret = await bcrypt.compare(
       process.env.ADMIN_SECRET_KEY,
-      admin.secret,
+      secret,
     );
     if (!compareSecret) {
+      console.log(admin.secret);
       return res.status(401).json({
         error: "4Please try to login with correct credentials!",
       });
