@@ -13,7 +13,7 @@ const app = express();
 const socket = require("socket.io");
 app.use(
   cors({
-    origin: ["https://smashingpages-616e5.web.app", "http://localhost:3000"],
+    origin: "https://smashingpages-616e5.web.app",
     credentials: true,
   })
 );

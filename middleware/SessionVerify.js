@@ -1,6 +1,6 @@
 const SessionVerify = (req, res, next) => {
   try {
-    const user = req.session && req.session.user;
+    const user = req.session.user && req.session.user;
     console.log(req.session);
     if (!user) {
       return res.status(401).json({ error: "Unauthorized!" });
