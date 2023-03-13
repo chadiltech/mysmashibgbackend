@@ -1,6 +1,6 @@
-const SessionVerify = async (req, res, next) => {
+const SessionVerify = (req, res, next) => {
   try {
-    const user = await req.session.user && req.session.user;
+    const user = req.session.user && req.session.user;
     console.log(user);
     if (!user) {
       return res.status(401).json({ error: "Unauthorized!" });

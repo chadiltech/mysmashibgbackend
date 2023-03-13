@@ -21,7 +21,7 @@ const SendVerificationMail = async (data) => {
       error: "email is required",
     };
   }
-  const confirmUrl = `http://localhost:3000${route}?_id=${id}&token=${token}`;
+  const confirmUrl = `https://smashingpages-616e5.web.app${route}?_id=${id}&token=${token}`;
   const html = `
   <html>
   <body>

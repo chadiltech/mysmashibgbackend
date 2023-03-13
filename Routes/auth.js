@@ -220,7 +220,6 @@ router.post(
         /* Returning a JSON object with the authToken property set to the token. */
         if (user.configEmail === true) {
           req.session.user = user.id;
-          req.session.save();
           return res.json({isVerified: true, session: req.session});
         }
       } catch (err) {
