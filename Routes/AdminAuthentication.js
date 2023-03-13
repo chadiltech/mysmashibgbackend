@@ -164,19 +164,19 @@ router.post("/myadmin/login", async (req, res) => {
     if (!admin) {
       return res
         .status(401)
-        .json({error: "Please try to login with correct credentials!"});
+        .json({error: "1Please try to login with correct credentials!"});
     }
     const comparePassword = await bcrypt.compare(password, admin.password);
     if (!comparePassword) {
       return res
         .status(401)
-        .json({error: "Please try to login with correct credentials!"});
+        .json({error: "2Please try to login with correct credentials!"});
     }
     const Providedsecret = Buffer.from(secret, "hex");
     const adminsecretkey = Buffer.from(process.env.ADMIN_SECRET_KEY, "hex");
     if (Buffer.compare(Providedsecret, adminsecretkey) !== 0) {
       return res.status(401).json({
-        error: "Please try to login with correct credentials!",
+        error: "3Please try to login with correct credentials!",
       });
     }
     const compareSecret = await bcrypt.compare(
@@ -185,7 +185,7 @@ router.post("/myadmin/login", async (req, res) => {
     );
     if (!compareSecret) {
       return res.status(401).json({
-        error: "Please try to login with correct credentials!",
+        error: "4Please try to login with correct credentials!",
       });
     }
     if (admin.configEmail === false) {
