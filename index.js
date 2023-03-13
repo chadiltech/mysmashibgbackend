@@ -41,7 +41,7 @@ app.use(
 );
 
 /* Setting the port to 5000. */
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 /* A middleware that parses the body of the request. */
 app.use(express.json());
@@ -56,7 +56,7 @@ app.get("/", (req, res) => {
   res.send(`<h1>hello adil</h1>`);
 });
 const server = app.listen(port, () => {
-  console.log(`live on http://localhost:${port}`);
+  console.log(port);
 });
 
 const io = socket(server, {
