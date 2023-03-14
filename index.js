@@ -10,6 +10,8 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 require("dotenv").config();
 const app = express();
+const http = require("http");
+const { Server } = require("socket.io");
 const socket = require("socket.io");
 app.set("trust proxy", 1);
 app.use(
@@ -56,15 +58,14 @@ app.use("/api/order", require("./Routes/CreateOrder"));
 app.get("/", (req, res) => {
   res.send(`<h1>hello adil</h1>`);
 });
-const server = app.listen(port, () => {
+app.listen(port, () => {
   console.log(port);
 });
-
-const io = socket([server, `https://smashing-pages-backend.up.railway.app`], {
+const httpServer = http.createServer();
+const io = new Server(httpServer, {
   cors: {
     origin: ["https://smashingpages-616e5.web.app/", "http://localhost:3000"],
     methods: ["GET", "POST", "DELETE", "PUT"],
-    credentials: true,
   },
 });
 
