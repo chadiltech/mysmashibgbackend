@@ -10,7 +10,14 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 require("dotenv").config();
 const app = express();
-const socket = require("socket.io");
+const http = require("http");
+const server = http.createServer(app);
+const io = require("socket.io")(server, {
+  cors: {
+    origin: ["https://smashingpages-616e5.web.app/", "http://localhost:3000"],
+    methods: ["GET", "POST", "DELETE", "PUT"],
+  },
+});
 app.set("trust proxy", 1);
 app.use(
   cors({
@@ -56,16 +63,6 @@ app.use("/api/order", require("./Routes/CreateOrder"));
 app.get("/", (req, res) => {
   res.send(`<h1>hello adil</h1>`);
 });
-const server = app.listen(port, () => {
-  console.log(port);
-});
-
-const io = socket(server, {
-  cors: {
-    origin: ["https://smashingpages-616e5.web.app/", "http://localhost:3000"],
-    methods: ["GET", "POST", "DELETE", "PUT"],
-  },
-});
 
 io.on("connection", (socket) => {
   socket.on("newOrder", (order) => {
@@ -77,6 +74,10 @@ io.on("connection", (socket) => {
   socket.on("newUser", (user) => {
     io.emit("getnewUser", user);
   });
+});
+
+server.listen(port, () => {
+  console.log(port);
 });
 /* Connecting to the database. */
 connectDb();
