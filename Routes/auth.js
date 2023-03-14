@@ -7,7 +7,6 @@ const { body, validationResult } = require("express-validator");
 const SendVerificationMail = require("../mail/SendVerification");
 /* A library that allows you to hash passwords. */
 const bcrypt = require("bcryptjs");
-const emailCheck = require("email-check");
 /* A library that allows you to create and verify JSON Web Tokens. */
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
