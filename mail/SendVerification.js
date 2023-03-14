@@ -1,5 +1,4 @@
 const nodemailer = require("nodemailer");
-const emailCheck = require("email-check");
 // transporter for sending mails
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -23,13 +22,6 @@ const SendVerificationMail = async (data) => {
     };
   }
 
-   // Check if email exists
-   const emailExists = await emailCheck(email);
-   if (!emailExists) {
-     return {
-       error: "email address you entered is invalid or doesn't exist",
-     };
-   }
   const confirmUrl = `https://smashingpages-616e5.web.app${route}?_id=${id}&token=${token}`;
   const html = `
   <html>
