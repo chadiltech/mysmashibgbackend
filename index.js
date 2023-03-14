@@ -62,7 +62,7 @@ const server = app.listen(port, () => {
 
 const io = socket(server, {
   cors: {
-    origin: ["https://smashingpages-616e5.web.app/", "http://localhost:3000"],
+    origin: ["https://smashingpages-616e5.web.app", "http://localhost:3000"],
     methods: ["GET", "POST", "DELETE", "PUT"],
   },
 });
