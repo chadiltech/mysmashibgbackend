@@ -51,7 +51,7 @@ const SendVerificationMail = async (data) => {
   </html>
   `;
   const mailOptions = {
-    from: "drcadil388@gmail.com", // sender address
+    from: "contact.smashingpages@gmail.com", // sender address
     to: email, // list of receivers
     subject: subject, // Subject line
     html: html, // plain text body
