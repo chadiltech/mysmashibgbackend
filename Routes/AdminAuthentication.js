@@ -64,11 +64,11 @@ router.get(
 router.get("/verify/myadmin/token", isAdmin, async (req, res) => {
   const adminId = req.session.admin && req.session.admin;
   if (!adminId) {
-    return res.status(401).json({error: "1Unauthorized"});
+    return res.status(401).json({error: "Unauthorized"});
   }
   const admin = await Admin.findById(adminId);
   if (!admin) {
-    return res.status(401).json({error: "2Unauthorized"});
+    return res.status(401).json({error: "Unauthorized"});
   }
   res.status(200).json({verified: true});
 });

@@ -35,8 +35,9 @@ app.use(
     saveUninitialized: true,
     store: store,
     cookie: {
-      secure: true,
-      sameSite: "none", // set to 'none' if your app is hosted on a different domain
+      // secure: true,
+      httpOnly:true,
+      // sameSite: "none", // set to 'none' if your app is hosted on a different domain
       maxAge: 86400000, // session expiration time in milliseconds
     },
   })
@@ -54,6 +55,7 @@ app.use("/api/auth/", require("./Routes/auth"));
 app.use("/api/admin/", require("./Routes/AdminAuthentication"));
 app.use("/api/user/profile", require("./Routes/userProfile"));
 app.use("/api/order", require("./Routes/CreateOrder"));
+app.use("/api/message",require("./Routes/ContactMsg"))
 app.get("/", (req, res) => {
   res.send(`<h1>hello adil</h1>`);
 });

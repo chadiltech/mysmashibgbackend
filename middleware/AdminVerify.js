@@ -11,14 +11,6 @@ const isAdmin = async (req, res, next) => {
     if (!admin) {
       return res.status(401).send({error: "Session expired!"});
     }
-
-    const compareSecret = bcrypt.compare(
-        process.env.ADMIN_SECRET_KEY,
-        admin.secret,
-    );
-    if (!compareSecret) {
-      return res.status(401).send({error: "Invalid credentials!"});
-    }
     next();
   } catch (error) {
     return res.status(500).json({error: error.message});
