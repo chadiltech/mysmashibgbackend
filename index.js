@@ -35,7 +35,8 @@ app.use(
     store: store,
     cookie: {
       secure: true,
-      sameSite: "lax", // set to 'none' if your app is hosted on a different domain
+      sameSite: "none", // set to 'none' if your app is hosted on a different domain
+      domain:'smashingpages-616e5.web.app',
       maxAge: 86400000, // session expiration time in milliseconds
     },
   })
