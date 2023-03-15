@@ -30,10 +30,6 @@ const AdminSchema = new Schema({
     type: String,
     require: true,
   },
-  secret: {
-    type: String,
-    require: true,
-  },
   password: {
     type: String,
     require: true,
