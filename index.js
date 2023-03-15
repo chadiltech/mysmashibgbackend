@@ -29,6 +29,7 @@ app.use(cookieParser());
 // set up the session middleware
 app.use(
   session({
+    name:"Login",
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
