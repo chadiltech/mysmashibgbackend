@@ -209,7 +209,7 @@ router.delete("/cancelled/deletByAdmin", async (req, res) => {
   try {
     const orderIds = req.body.orders;
     const order = await Order.deleteMany({_id: {$in: orderIds}});
-    return res.status(200).json(order);
+    return res.status(200).json({messahe:'Success'});
  } catch (error) {
     return res.status(500).json({error: error.message});
  }

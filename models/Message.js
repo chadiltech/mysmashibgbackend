@@ -25,6 +25,9 @@ const MessageSchima = new Schema({
     type: String,
     require: true,
   },
+  isRead: {
+    type: Boolean,
+  },
   Date: {
     type: Date,
     default: Date.now,

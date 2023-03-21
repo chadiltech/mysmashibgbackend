@@ -82,7 +82,7 @@ router.post(
       });
       return res.status(201).json({
         success: true,
-        message: SendVerificationMail.message,
+        message: "Acount created😄",
       });
     } catch (err) {
       res.status(500).json({ error: err.message });

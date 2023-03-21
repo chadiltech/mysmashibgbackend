@@ -16,12 +16,12 @@ router.post("/contectus/message", SessionVerify, async (req, res) => {
       email: email,
       contact: contact,
       message: message,
-      isNewmsg: true,
+      isRead: false,
     });
     await Message.save();
-    return res
-      .status(200)
-      .json({ message: "Message has been sent we will contact you shortly😄" });
+    return res.status(200).json({
+      successMsg: "Message has been sent we will contact you shortly😄",
+    });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
@@ -60,6 +60,34 @@ router.get("/getmessage/foradminuser/:id", isAdmin, async (req, res) => {
         .json({ error: "No messages found for this user!" });
     }
     return res.status(200).json(messages);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+});
+
+//read message by admin
+router.put("/read/message/byadmin/:id", async (req, res) => {
+  try {
+    const messageId = req.params.id;
+    const message = await Msg.findById(messageId);
+    message.isRead = true;
+    await message.save();
+    return res.status(200).send("success");
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+});
+//delete messages
+router.delete("/delete/messages/admin", async (req, res) => {
+  try {
+    const idArray = req.body.idArray;
+    const messages = await Msg.deleteMany({ _id: { $in: idArray } });
+    if (!messages) {
+      return res
+        .status(404)
+        .json({ error: "The message you want to delete is not found!" });
+    }
+    return res.status(200).json({message:'Success'});
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }

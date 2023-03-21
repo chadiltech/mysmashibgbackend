@@ -29,7 +29,7 @@ app.use(cookieParser());
 // set up the session middleware
 app.use(
   session({
-    name:"Login",
+    name: "Login",
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
@@ -54,7 +54,7 @@ app.use("/api/auth/", require("./Routes/auth"));
 app.use("/api/admin/", require("./Routes/AdminAuthentication"));
 app.use("/api/user/profile", require("./Routes/userProfile"));
 app.use("/api/order", require("./Routes/CreateOrder"));
-app.use("/api/message",require("./Routes/ContactMsg"))
+app.use("/api/messages", require("./Routes/ContactMsg"));
 app.get("/", (req, res) => {
   res.send(`<h1>hello adil</h1>`);
 });
@@ -78,6 +78,21 @@ io.on("connection", (socket) => {
 io.on("connection", (socket) => {
   socket.on("newUser", (user) => {
     io.emit("getnewUser", user);
+  });
+});
+io.on("connection", (socket) => {
+  socket.on("newMessage", (message) => {
+    io.emit("newMessage", message);
+  });
+});
+io.on("connection", (socket) => {
+  socket.on("readMessage", () => {
+    io.emit("readMessage");
+  });
+});
+io.on("connection", (socket) => {
+  socket.on("profilePhoto", () => {
+    io.emit("profilePhoto");
   });
 });
 /* Connecting to the database. */
